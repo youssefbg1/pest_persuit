@@ -9413,7 +9413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: walkSpeed
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
       propertyPath: sprintSpeed
@@ -50240,7 +50240,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
@@ -51314,7 +51314,7 @@ Transform:
   m_GameObject: {fileID: 2005459808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.9, y: 10.66, z: 20.07}
+  m_LocalPosition: {x: -32.9, y: 10.66, z: 20.7}
   m_LocalScale: {x: 1, y: 13.5, z: 18}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51403,7 +51403,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0.5}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -83.9, y: 58.28, z: 45.57}
+  m_ConnectedAnchor: {x: -7.8600025, y: 11.731269, z: 38.670002}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
