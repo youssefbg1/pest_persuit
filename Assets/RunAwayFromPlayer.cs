@@ -3,7 +3,7 @@ using UnityEngine;
 public class RunAwayFromPlayer : MonoBehaviour
 {
     public float moveSpeed = 3f;
-    public float runningRadius = 5f; // The radius within which the object starts running
+    public float raycastDistance = 10f; // Maximum distance to cast the ray
     private Transform player;
     private bool isRunning = false;
 
@@ -21,21 +21,31 @@ public class RunAwayFromPlayer : MonoBehaviour
     {
         if (player != null)
         {
-            Vector3 directionToPlayer = transform.position - player.position;
-            float distanceToPlayer = directionToPlayer.magnitude;
+            // Calculate the direction from the object to the player
+            Vector3 directionToPlayer = player.position - transform.position;
 
-            // Check if the player is within the running radius
-            if (distanceToPlayer < runningRadius)
+            // Raycast to check if the player's line of sight intersects with the object
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, directionToPlayer, out hit, raycastDistance))
             {
-                // Player is within the running radius, start running away from the player
-                isRunning = true;
+                if (hit.collider.CompareTag("Player"))
+                {
+                    // Player is aiming at the object, start running away
+                    isRunning = true;
+                }
+                else
+                {
+                    // Player is not aiming at the object
+                    isRunning = false;
+                }
             }
 
             // Run away from the player if isRunning is true
             if (isRunning)
             {
-                directionToPlayer.Normalize();
-                transform.position += directionToPlayer * moveSpeed * Time.deltaTime;
+                // Calculate the opposite direction to run away from the player
+                Vector3 oppositeDirection = -directionToPlayer.normalized;
+                transform.position += oppositeDirection * moveSpeed * Time.deltaTime;
             }
         }
     }
