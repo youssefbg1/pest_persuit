@@ -55,9 +55,9 @@ public class antAI : MonoBehaviour
 
     void SetRandomTarget()
     {
-        float randomOffsetX = Random.Range(-15f, 15f); // Adjust the range based on your desired offset
-        float randomOffsetY = transform.position.y; // Adjust the range based on your desired offset
-        float randomOffsetZ = Random.Range(-15f, 15f); // Adjust the range based on your desired offset
+        float randomOffsetX = Random.Range(-15f, 15f) + 5f;
+        float randomOffsetY = 0; // Adjust the range based on your desired Y offset
+        float randomOffsetZ = Random.Range(-15f, 15f) + 5f;
 
         target = pos + new Vector3(randomOffsetX, randomOffsetY, randomOffsetZ);
         target = new Vector3(target.x, transform.position.y, target.z);
@@ -68,11 +68,15 @@ public class antAI : MonoBehaviour
 
         if (player != null)
         {
-            // Calculate the direction to the player
-            Vector3 jumpDirection = player.transform.position - transform.position;
+            // Calculate the direction towards the player
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y += 5f;
 
-            // Apply an upward force towards the player to simulate jumping
-            GetComponent<Rigidbody>().AddForce(jumpDirection.normalized * jumpForce, ForceMode.Impulse);
+            // Normalize the direction to get a unit vector
+            direction.Normalize();
+
+            // Set the velocity to make the GameObject jump towards the player
+            GetComponent<Rigidbody>().velocity = direction * jumpForce;
         }
         else
         {
@@ -95,14 +99,6 @@ public class antAI : MonoBehaviour
 
                 shouldMove = true; // Set the flag to allow movement when the player is detected
             }
-            else
-            {
-                shouldMove = false; // Reset the flag if the player is not detected
-            }
-        }
-        else
-        {
-            shouldMove = false; // Reset the flag if nothing is detected
         }
     }
 }
